@@ -1,10 +1,84 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import Image from 'next/image'
+import styled from 'styled-components'
+
 import { api } from "../../src/services/api"
 import { Movie } from '../../src/components/movie'
 import { useFilter } from '../../src/contexts/filter'
 import { useRouter } from 'next/dist/client/router'
+import { AllMoviesStyle } from '../../src/components/styles/home'
+
+const Main = styled.main`
+    margin: 8px 16px;
+
+    section {
+        margin-bottom: 16px;
+
+        h2 {
+            margin-bottom: 8px;
+        }
+    }
+`
+
+const BackButton = styled.button`
+    background: none;
+    outline: none;
+    border: 2px solid #f2f2f2;
+    border-radius: 0 0 10 10px;
+    color: #f2f2f2;
+
+    height: 50px;
+    width: 50px;
+    margin-bottom: 16px;
+    font-weight: 700;
+
+    &:hover {
+        background: #f2f2f2;
+        color: #111111;
+        transition: 0.2s;
+    }
+`
+const Apresentation = styled.section`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    margin-left: 8px;
+    
+    img {  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+
+        padding: 20px;
+        height: 500px;
+
+        &:hover {
+            transform: scale(110%);
+            transition: 0.2s;
+        }
+    }
+`
+
+const Article = styled.div`
+    width: 70%;
+    margin-left: 16px;
+    float: right;
+
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+`
 
 type MovieData = {
     movie: {
@@ -46,36 +120,39 @@ export default function MoviePage({ movie, similarMovies }: MovieData) {
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet"></link>
             </Head>
 
-            <main>
+            <Main>
                 <aside>
-                    <button onClick={() => backToHomepage(`/${currentSlug}`)}>
+                    <BackButton onClick={() => backToHomepage(`/${currentSlug}`)}>
                         Voltar
-                    </button>
+                    </BackButton>
                 </aside>
 
-                <section>
-                    <img src={`${BASE_URL}/${movie.poster_path}`} alt={movie.title} layout='fill' />
-                </section>
+                <Apresentation>
+                    <Image 
+                        src={`${BASE_URL}/${movie.poster_path}`} 
+                        alt={movie.title} 
+                        width={222} 
+                        height={333.5}
+                    />
 
-                <article>
-                    <h1>{movie.title}</h1>
-                    <h2>Sinopse</h2>
-                    <p>{movie.overview}</p>           
-                </article>
-
-                <aside>
-                    <span>{movie.vote_average}</span>
-                </aside>
+                    <Article>
+                        <h1>{movie.title} - {movie.vote_average}</h1>
+                        <h2>Sinopse</h2>
+                        <p>{movie.overview}</p>      
+                    </Article>
+                </Apresentation>
 
                 <section>
                     <h2>Another Movies</h2>
-                    {similarMovies.map((movie) => {
-                        return (
-                            <Movie key={movie.id} id={movie.id} image={`${BASE_URL}/${movie.poster_path}`} />
-                        )
-                    })}
+                    <AllMoviesStyle>
+                        {similarMovies.map((movie) => {
+                            return (
+                                <Movie key={movie.id} id={movie.id} image={`${BASE_URL}/${movie.poster_path}`} />
+                            )
+                        })}
+                    </AllMoviesStyle>
                 </section>
-            </main>
+            </Main>
         </div>
     )
 }
