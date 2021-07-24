@@ -1,22 +1,17 @@
-import { useRouter } from 'next/dist/client/router'
 import styled from 'styled-components';
+import { useRouter } from 'next/router'
 
 const MovieStyle = styled.li`
-    text-align: center;
-    list-style: none;
+    display: grid;
+    gap: 10px;
 
-    background-repeat: no-repeat;
+    background: none no-repeat;
+    list-style: none;
     background-size: 222px 333.5px;
     width: 222px;
     height: 333.5px;
-    
-    padding: 2rem;
-    margin: 20px 20px;
+
     filter: grayscale(90%);
-    
-    display: inline-block;
-    item-align: center;
-    justify-content: center;
     
     &:hover {
         filter: grayscale(0%);
@@ -24,6 +19,13 @@ const MovieStyle = styled.li`
 
         transition: 0.2s
     }
+`
+
+const ButtonStyle = styled.button`
+    display: inline-block;
+    background: none;
+    border: none;
+    outline: none;
 `
 
 type MovieProps = {
@@ -41,8 +43,8 @@ export function Movie(props: MovieProps) {
     }
 
     return (
-        <button onClick={() => goToMoviePage(`/movie/${props.id}`)}>
+        <ButtonStyle onClick={() => goToMoviePage(`/movie/${props.id}`)}>
             <MovieStyle style={{backgroundImage: `url(${props.image})`}} />
-        </button>
+        </ButtonStyle>
     )
 }
