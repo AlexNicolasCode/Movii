@@ -1,8 +1,8 @@
-import Link from "next/link"
+import { useRouter } from "next/dist/client/router"
 import { useEffect } from "react"
-import styled from "styled-components"
 import { useFilter } from "../../contexts/filter"
 
+import styled from "styled-components"
 
 const ItemPagination = styled.li`
     padding: 10px;
@@ -27,47 +27,51 @@ type PageProps = {
 
 export function Pagination(props: PageProps) {
     const id: number = parseFloat(props.page_id)
-
     const { setCurrentSlug } = useFilter()
 
     useEffect(() => {
         id === NaN ? console.log("no slug") : setCurrentSlug(id)
     }, [id])
 
+    const router = useRouter()
+    const sendToRoute = (route: string) => {
+        router.push(route)
+    }
+
     return (
         <ul>
             {id > 1 ? (
-                <Link href={`/1`}>Voltar</Link>
+                <button onClick={() => sendToRoute(`/1`)}>Voltar</button>
             ) : (
-                <Link href={`/1`}>Ok</Link>
+                <button onClick={() => sendToRoute(`/1`)}>Ok</button>
             )}
 
             <PaginationStyle>
-                <Link href={`/${id}`}>
+                <button onClick={() => sendToRoute(`(/${id}`)}>
                     <ItemPagination>
                         {`${id}`}
                     </ItemPagination>
-                </Link>
-                <Link href={`/${id + 1}`}>
+                </button>
+                <button onClick={() => sendToRoute(`/${id + 1}`)}>
                     <ItemPagination>
                         {`${id + 1}`}
                     </ItemPagination>
-                </Link>
-                <Link href={`/${id + 2}`}>
+                </button>
+                <button onClick={() => sendToRoute(`/${id + 2}`)}>
                     <ItemPagination>
                         {`${id + 2}`}
                     </ItemPagination>
-                </Link>
-                <Link href={`/${id + 3}`}>
+                </button>
+                <button onClick={() => sendToRoute(`/${id + 3}`)}>
                     <ItemPagination>
                         {`${id + 3}`}
                     </ItemPagination>
-                </Link>
-                <Link href={`/${id + 4}`}>
+                </button>
+                <button onClick={() => sendToRoute(`/${id + 4}`)}>
                     <ItemPagination>
                         {`${id + 4}`}
                     </ItemPagination>
-                </Link>
+                </button>
             </PaginationStyle>
         </ul>
     )
