@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/link'
+import Image from 'next/image'
 import { api } from "../../src/services/api"
 import { Movie } from '../../src/components/movie/movie'
 import { useFilter } from '../../src/contexts/filter'
+import { useRouter } from 'next/dist/client/router'
 
 type MovieData = {
     movie: {
@@ -29,8 +30,12 @@ type Slug = {
 
 export default function MoviePage({ movie, similarMovies }: MovieData) {
     const { currentSlug } = useFilter();
-
     const BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+    const router = useRouter();
+    const backToHomepage = (route: string) => {
+        route === undefined ? router.push('/') : router.push(route)
+    }
 
     return (
         <div style={{ backgroundImage: `url(${BASE_URL}/${movie.backdrop_path}) no-repeat fixed` }}>
@@ -43,13 +48,13 @@ export default function MoviePage({ movie, similarMovies }: MovieData) {
 
             <main>
                 <aside>
-                    <Link href={`/${currentSlug}`}>
+                    <button onClick={() => backToHomepage(`/${currentSlug}`)}>
                         Voltar
-                    </Link>
+                    </button>
                 </aside>
 
                 <section>
-                    <img src={`${BASE_URL}/${movie.poster_path}`} alt={movie.title} />
+                    <img src={`${BASE_URL}/${movie.poster_path}`} alt={movie.title} layout='fill' />
                 </section>
 
                 <article>
