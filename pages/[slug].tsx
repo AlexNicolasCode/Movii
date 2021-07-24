@@ -8,7 +8,7 @@ import { Gender } from '../src/components/categories/gender'
 import { useFilter } from '../src/contexts/filter';
 
 import { FilterModel } from '../src/components/filter';
-import { AllCategories, Category, OptionsCategories } from '../src/components/styles/home'
+import { AllCategories, AllMoviesStyle, Category, FiltersList, OptionsCategories } from '../src/components/styles/home'
 import { Pagination } from '../src/components/pagination';
 
 type MovieData = {
@@ -103,9 +103,17 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
       </Head>
 
       <header>
-        <section>
-          {filters}
-        </section>
+        {filters.length > 0 ? (
+          <section>
+            <span style={{ marginLeft: "8px" }}>Showing movies at:</span>
+            <FiltersList>
+              {filters}
+            </FiltersList>
+          </section>
+          ) : (
+            <span style={{ marginLeft: "8px" }}>Showing all movies</span>
+          )
+        }
 
         <section>
           <OptionsCategories onClick={toggleCaregoriesButtonStatus}>
@@ -125,13 +133,11 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
         <Category>The Most Popular Movies</Category>
 
         <section>
-          {currentMovies.map((movie, index) => {
-            return (
-              <>
-                <Movie key={index} id={movie.id} rate={movie.vote_average} image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-              </>
-            )
-          })}
+          <AllMoviesStyle>
+            {currentMovies.map((movie, index) => {
+              return <Movie key={index} id={movie.id} rate={movie.vote_average} image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+            })}
+          </AllMoviesStyle>
         </section>
 
         <section>

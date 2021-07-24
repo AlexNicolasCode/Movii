@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-export const Category = styled.h2`
+export const Category = styled.h1`
     font-size: 1.5rem;
 
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-left: 8px;
 `
 
 export const OptionsCategories = styled.button`
@@ -33,4 +33,15 @@ export const AllCategories = styled.section`
     margin-top: 10px;
     width: 15%;
     height: auto;
+`
+
+export const AllMoviesStyle = styled.ul`
+    width: 90%;
+    padding: 0;
+    margin: auto;
+`
+
+export const FiltersList = styled.ul`
+    display: inline-block;
+    width: 80%;
 `
