@@ -57,7 +57,7 @@ export default function Home({ allMovies, genres }: HomeProps) {
         })
         
         setFilters(categoriesFilters)
-      }
+      } else setFilters([])
     }
 
     getFiltersProps()

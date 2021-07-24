@@ -63,7 +63,7 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
         })
 
         setFilters(categoriesFilters)
-      }
+      } else setFilters([])
     }
 
     getFiltersProps()
