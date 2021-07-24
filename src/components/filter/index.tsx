@@ -1,5 +1,12 @@
+import styled from "styled-components"
 import { useFilter } from "../../contexts/filter"
-import { FilterSelected } from "../styles/styles"
+
+const FilterSelected = styled.li`
+    background: #f2f2f2;
+    color: #020202;
+    padding: 10px;
+    border-radius: 10px;
+`
 
 type FilterProps = {
     name: string,

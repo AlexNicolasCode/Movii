@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { api } from "../../src/services/api"
-import { Movie } from '../../src/components/movie/movie'
+import { Movie } from '../../src/components/movie'
 import { useFilter } from '../../src/contexts/filter'
 import { useRouter } from 'next/dist/client/router'
 

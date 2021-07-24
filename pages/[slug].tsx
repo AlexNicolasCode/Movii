@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Movie } from '../src/components/movie/movie'
+import { Movie } from '../src/components/movie'
 import { api } from '../src/services/api'
 
 import { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import { Gender } from '../src/components/categories/gender'
 import { useFilter } from '../src/contexts/filter';
 
 import { FilterModel } from '../src/components/filter';
-import { AllCategories, Category, OptionsCategories } from '../src/components/styles/styles'
+import { AllCategories, Category, OptionsCategories } from '../src/components/styles/home'
 import { Pagination } from '../src/components/pagination';
 
 type MovieData = {
