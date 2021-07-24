@@ -1,24 +1,49 @@
+import styled from "styled-components"
+
 import { useRouter } from "next/dist/client/router"
 import { useEffect } from "react"
 import { useFilter } from "../../contexts/filter"
 
-import styled from "styled-components"
-
 const ItemPagination = styled.li`
-    padding: 10px;
-    width: 100%;
-    height: 10px;
-
     text-align: center;
+    list-style: none;
+
+    width: auto;
+    padding: 10px;
 `
 
-const PaginationStyle = styled.section`
-    height: 10%;
-    width: 50%;
-
+const PaginationStyle = styled.ul`
+    display: flex;
+    flex: 1;
     justify-content: center;
-    text-align: center;
     margin: auto;
+
+    padding: 0;
+`
+const Button = styled.button`
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    font-weight: 700;
+
+    width: 50px;
+    height: 50px;
+    color: #f2f2f2;
+`
+
+const CurrentPageButton = styled.button`
+    background: #1fcbff;
+    border: none;
+    outline: none;
+    cursor: none;
+
+    font-weight: 700;
+
+    width: 50px;
+    height: 50px;
+    color: #f2f2f2;
 `
 
 type PageProps = {
@@ -39,40 +64,38 @@ export function Pagination(props: PageProps) {
     }
 
     return (
-        <ul>
+        <PaginationStyle>
             {id > 1 ? (
-                <button onClick={() => sendToRoute(`/1`)}>Voltar</button>
+                <Button onClick={() => sendToRoute(`/`)}>Home</Button>
             ) : (
-                <button onClick={() => sendToRoute(`/1`)}>Ok</button>
+                <Button disabled/>
             )}
 
-            <PaginationStyle>
-                <button onClick={() => sendToRoute(`(/${id}`)}>
-                    <ItemPagination>
-                        {`${id}`}
-                    </ItemPagination>
-                </button>
-                <button onClick={() => sendToRoute(`/${id + 1}`)}>
-                    <ItemPagination>
-                        {`${id + 1}`}
-                    </ItemPagination>
-                </button>
-                <button onClick={() => sendToRoute(`/${id + 2}`)}>
-                    <ItemPagination>
-                        {`${id + 2}`}
-                    </ItemPagination>
-                </button>
-                <button onClick={() => sendToRoute(`/${id + 3}`)}>
-                    <ItemPagination>
-                        {`${id + 3}`}
-                    </ItemPagination>
-                </button>
-                <button onClick={() => sendToRoute(`/${id + 4}`)}>
-                    <ItemPagination>
-                        {`${id + 4}`}
-                    </ItemPagination>
-                </button>
-            </PaginationStyle>
-        </ul>
+            <CurrentPageButton disabled>
+                <ItemPagination>
+                    {`${id}`}
+                </ItemPagination>
+            </CurrentPageButton>
+            <Button onClick={() => sendToRoute(`/${id + 1}`)}>
+                <ItemPagination>
+                    {`${id + 1}`}
+                </ItemPagination>
+            </Button>
+            <Button onClick={() => sendToRoute(`/${id + 2}`)}>
+                <ItemPagination>
+                    {`${id + 2}`}
+                </ItemPagination>
+            </Button>
+            <Button onClick={() => sendToRoute(`/${id + 3}`)}>
+                <ItemPagination>
+                    {`${id + 3}`}
+                </ItemPagination>
+            </Button>
+            <Button onClick={() => sendToRoute(`/${id + 4}`)}>
+                <ItemPagination>
+                    {`${id + 4}`}
+                </ItemPagination>
+            </Button>
+        </PaginationStyle>
     )
 }
