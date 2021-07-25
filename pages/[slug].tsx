@@ -10,6 +10,7 @@ import { useFilter } from '../src/contexts/filter';
 import { FilterModel } from '../src/components/filter';
 import { AllCategories, AllMoviesStyle, Title, FiltersList, OptionsCategories } from '../src/components/styles/home'
 import { Pagination } from '../src/components/pagination';
+import { GetStaticPaths } from 'next';
 
 type MovieData = {
   id: string,
@@ -160,18 +161,25 @@ export const getStaticPaths = async () => {
   const movies = data.results
 
   const paths = movies.map((item: Slug) => {
-      const id = toString(item.id)
-
-      return {
+      const id = item.id.toString()
+      if (item.id > 5000) {
+        return {
+          params: {
+              slug: "1"
+          },
+        }
+      } else {
+        return {
           params: {
               slug: id
           },
+        }
       }
   })
   
   return { 
       paths,
-      fallback: 'blocking'
+      fallback: false
   }
 }
 
@@ -185,6 +193,7 @@ export const getStaticProps = async (ctx: ctxType) => {
   const { slug } = ctx.params
   const { data } = await api.get(`movie/popular?api_key=c87d684e83e180236e81d0dae298e88c&page=${slug}`)
 
+  console.log(`Building slug: ${slug}`)
   const genresData = await api.get('genre/movie/list?api_key=c87d684e83e180236e81d0dae298e88c');
   const genres = genresData.data.genres;
   

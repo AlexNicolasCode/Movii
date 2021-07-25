@@ -8,8 +8,8 @@ type FilterData = {
     removeFilter: (props: string) => void,
     setCurrentFiltersData: Dispatch<ElementFilted[]>,
     currentIdsFilters: number[],
-    currentSlug?: string,
-    setCurrentSlug: Dispatch<string>,
+    currentSlug?: number,
+    setCurrentSlug: Dispatch<number>,
 };
 
 const FilterContext = createContext({} as FilterData);
@@ -38,7 +38,7 @@ export function FilterProvider({ children }: FilterProviderProps) {
     const [ currentFiltersData, setCurrentFiltersData ] = useState<ElementFilted[]>([])
     const [ currentNamesFilters, setCurrentNamesFilters ] = useState<string[]>([])
     const [ currentIdsFilters, setCurrentIdsFilters ] = useState<number[]>([])
-    const [ currentSlug, setCurrentSlug ] = useState<string>()
+    const [ currentSlug, setCurrentSlug ] = useState<number>()
 
     useEffect(() => {
         const getProps = async () => {        
@@ -48,7 +48,9 @@ export function FilterProvider({ children }: FilterProviderProps) {
           const currentArraySortedIds: number[] = await currentFiltersData.map((filter: ElementFilted) => { return filter.id })
           setCurrentIdsFilters(currentArraySortedIds.sort())
 
-          sessionStorage.setItem('filters', currentFiltersData);
+          const filterInStorage: string = currentFiltersData.toString()
+
+          sessionStorage.setItem('filters', filterInStorage);
         }
 
         getProps()

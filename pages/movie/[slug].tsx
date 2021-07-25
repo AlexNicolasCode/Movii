@@ -163,7 +163,7 @@ export const getStaticPaths = async () => {
     const movies = data.results
 
     const paths = movies.map((item: Slug) => {
-        const id = toString(item.id)
+        const id = item.id.toString()
 
         return {
             params: {

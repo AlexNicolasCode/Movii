@@ -51,7 +51,7 @@ type PageProps = {
 }
 
 export function Pagination(props: PageProps) {
-    const id: number = parseFloat(props.page_id)
+    const id: number  = parseFloat(props.page_id)
     const { setCurrentSlug } = useFilter()
 
     useEffect(() => {
