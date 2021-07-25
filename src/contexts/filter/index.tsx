@@ -67,7 +67,7 @@ export function FilterProvider({ children }: FilterProviderProps) {
       
       if (filterVerify === undefined) {
           const filterReplaced: ElementFilted[] = await [...currentFiltersData, filterSelected]
-
+          
           const newFilterArray = await [...new Set(filterReplaced)]
           setCurrentFiltersData(newFilterArray)
         }

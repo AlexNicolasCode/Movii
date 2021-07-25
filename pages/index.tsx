@@ -17,9 +17,7 @@ type MovieData = {
   title: string,
   vote_average: string,
   poster_path: string,
-  genre_ids: [
-    genre: number[]
-  ]
+  genre_ids: number[]
 }
 
 type Genres = {
@@ -74,7 +72,10 @@ export default function Home({ allMovies, genres }: HomeProps) {
       });
 
       const movieListFilted = await allMovies.filter(movie => {
-        return movie.genre_ids.find(genre => { return genre == categoriesFiltedIds});
+        const filterResult = movie.genre_ids.filter(genre => categoriesFiltedIds.includes(genre));
+        if (filterResult.length === categoriesFiltedIds.length) {
+          return movie
+        }
       })
 
       setFilters(categoriesFilters)

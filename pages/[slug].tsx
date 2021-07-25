@@ -81,7 +81,10 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
       });
 
       const movieListFilted = await allMovies.filter(movie => {
-        return movie.genre_ids.find(genre => { return genre == categoriesFiltedIds});
+        const filterResult = movie.genre_ids.filter(genre => categoriesFiltedIds.includes(genre));
+        if (filterResult.length === categoriesFiltedIds.length) {
+          return movie
+        }
       })
 
       setFilters(categoriesFilters)
