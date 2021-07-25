@@ -3,24 +3,20 @@ import { useFilter } from '../../../contexts/filter'
 
 const ButtonGender = styled.button`
     text-align: center;
-    font-size: 12px; 
-
-    display: block;
+    font-size: 16px;
     background-color: #020202;
     color: #f2f2f2;
     
-    width: 100%;
+    width: 125px;
     height: 20px;
 
     outline: none;
     border: none;
-    margin: 0.5rem;
 
     &:hover {
         color: #020202;
-        background: #c4c4c4;
-        height: 40px;
-        font-weight: 600;
+        background: #f2f2f2;
+        font-weight: 700;
 
         transition: 0.2s;
     }

@@ -1,20 +1,18 @@
 import styled from 'styled-components'
 
-export const Category = styled.h1`
-    font-size: 1.5rem;
+export const Title = styled.h1`
+    font-size: 40px;
 
-    padding: 1rem;
+    padding: 10px;
     margin-left: 8px;
 `
 
 export const OptionsCategories = styled.button`
     color: #c1c1c1;
-    font-size: 1rem;
-    text-align: center;
-    float: right;
+    font-size: 16px;
     font-weight: 700;
-    
-    padding: 1rem;
+    width: 125px;
+    height: 40px;
     border: none;
     outline: none;
     background: #f2f2f2;
@@ -28,11 +26,12 @@ export const OptionsCategories = styled.button`
 
 export const AllCategories = styled.section`
     float: right;
-    z-index: 200;
-
-    margin-top: 10px;
-    width: 15%;
-    height: auto;
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    gap: 1px;
+    right: 0;
+    top: 0;
 `
 
 export const AllMoviesStyle = styled.ul`
