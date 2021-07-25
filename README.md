@@ -16,7 +16,7 @@ yarn dev
 ## Features
 - Pagination to discover new movies
 - Movie page
-- Filter by category (with multiples filters too)
+- Filter by category (with multiple filters or only with a filter)
 
 ## Used libraries and frameworks
 - ReactJS
