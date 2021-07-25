@@ -81,7 +81,7 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
       });
 
       const ids = await categoriesFiltedIds.join("").toString()
-      const { data } = await api.get(`movie/popular?api_key=c87d684e83e180236e81d0dae298e88c${ids}`)
+      const { data } = await api.get(`movie/popular?api_key=c87d684e83e180236e81d0dae298e88c&page=${currentSlug}${ids}`)
       const movieListFilted = data.results
       
       setFilters(categoriesFilters)
