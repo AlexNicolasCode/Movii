@@ -156,25 +156,18 @@ type Slug = {
 }
 
 export const getStaticPaths = async () => { 
-  const { data } = await api.get('movie/popular?api_key=c87d684e83e180236e81d0dae298e88c')
+  let allPages: number[] = []
 
-  const movies = data.results
+  for (let i = 1; i < 400; i++) {
+    allPages.length === 0 ? allPages = [i] : allPages = [...allPages, i]
+  }
 
-  const paths = movies.map((item: Slug) => {
-      const id = item.id.toString()
-      if (item.id > 5000) {
-        return {
-          params: {
-              slug: "1"
-          },
-        }
-      } else {
-        return {
-          params: {
-              slug: id
-          },
-        }
-      }
+  const paths = allPages.map(id => {
+    return {
+      params: {
+          slug: id.toString()
+      },
+    }
   })
   
   return { 
@@ -193,7 +186,6 @@ export const getStaticProps = async (ctx: ctxType) => {
   const { slug } = ctx.params
   const { data } = await api.get(`movie/popular?api_key=c87d684e83e180236e81d0dae298e88c&page=${slug}`)
 
-  console.log(`Building slug: ${slug}`)
   const genresData = await api.get('genre/movie/list?api_key=c87d684e83e180236e81d0dae298e88c');
   const genres = genresData.data.genres;
   
