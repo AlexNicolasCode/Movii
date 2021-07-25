@@ -150,12 +150,16 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
   )
 }
 
+type Slug = {
+  id: number
+}
+
 export const getStaticPaths = async () => { 
   const { data } = await api.get('movie/popular?api_key=c87d684e83e180236e81d0dae298e88c')
 
   const movies = data.results
 
-  const paths = movies.map((item) => {
+  const paths = movies.map((item: Slug) => {
       const id = toString(item.id)
 
       return {
