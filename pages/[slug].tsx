@@ -73,20 +73,17 @@ export default function PaginationPage({ allMovies, genres, slug }: HomeProps) {
   const getFiltersProps = async () => {      
     if (currentFiltersData.length > 0) {
       const categoriesFiltedIds = await currentFiltersData.map((filter) => {
-        return filter.id
+        return `&with_genres=${filter.id}`
       });
   
       const categoriesFilters = await currentFiltersData.map((filter, index) => {
         return <FilterModel key={index} name={filter.name}/>
       });
 
-      const movieListFilted = await allMovies.filter(movie => {
-        const filterResult = movie.genre_ids.filter(genre => categoriesFiltedIds.includes(genre));
-        if (filterResult.length === categoriesFiltedIds.length) {
-          return movie
-        }
-      })
-
+      const ids = await categoriesFiltedIds.join("").toString()
+      const { data } = await api.get(`movie/popular?api_key=c87d684e83e180236e81d0dae298e88c${ids}`)
+      const movieListFilted = data.results
+      
       setFilters(categoriesFilters)
       setCurrentMovies(movieListFilted) 
     } else setCurrentMovies(allMovies)
