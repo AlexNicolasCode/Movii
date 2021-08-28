@@ -1,15 +1,15 @@
 import Head from 'next/head';
-import { Movie } from '../src/components/movie'
+import { Movie } from '../src/components/Anothers/MovieComponent'
 import { GetStaticProps } from 'next'
 import { api } from '../src/services/api'
 
 import { useEffect, useState } from 'react';
-import { Gender } from '../src/components/categories/gender'
+import { Gender } from '../src/components/Anothers/Categories/Gender'
 import { useFilter } from '../src/contexts/filter';
 
-import { FilterModel } from '../src/components/filter';
-import { AllCategories, AllMoviesStyle, Title, FiltersList, OptionsCategories } from '../src/components/styles/home'
-import { Pagination } from '../src/components/pagination';
+import { FilterModel } from '../src/components/Anothers/Filter';
+import { AllCategories, AllMoviesStyle, Title, FiltersList, OptionsCategories, Footer } from '../src/components/Anothers'
+import { Pagination } from '../src/components/Anothers/Pagination';
 
 type MovieData = {
   id: string,
@@ -42,7 +42,6 @@ export default function Home({ allMovies, genres }: HomeProps) {
       currentFiltersData === undefined ? setCurrentMovies(allMovies) : getFiltersProps()
     }
 
-    console.log(currentFiltersData)
     getAllMovies()
   }, [])
 
@@ -68,7 +67,7 @@ export default function Home({ allMovies, genres }: HomeProps) {
       });
   
       const categoriesFilters = await currentFiltersData.map((filter, index) => {
-        return <FilterModel key={index} name={filter.name}/>
+        return <FilterModel  key={index} name={filter.name}/>
       });
 
       const ids = await categoriesFiltedIds.join("").toString()
@@ -134,9 +133,7 @@ export default function Home({ allMovies, genres }: HomeProps) {
         </section>
       </main>
 
-      <footer>
-        <span>Developed by Alex Nicolas</span>
-      </footer>
+      <Footer>Developed by Alex Nicolas</Footer>
     </div>
   )
 }

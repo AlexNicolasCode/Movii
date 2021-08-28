@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router'
 
 const MovieStyle = styled.li`
-    display: grid;
-    gap: 10px;
-
+    display: inline-flex;
     background: none no-repeat;
     list-style: none;
+
     background-size: 222px 333.5px;
     width: 222px;
     height: 333.5px;
 
+    margin: 0px 8px;
     filter: grayscale(90%);
     
     &:hover {
@@ -19,13 +19,13 @@ const MovieStyle = styled.li`
 
         transition: 0.2s
     }
-`
 
-const ButtonStyle = styled.button`
-    display: inline-block;
-    background: none;
-    border: none;
-    outline: none;
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 100vh;
+        background-size: 100% 100%;
+        margin: 0;
+    }
 `
 
 type MovieProps = {
@@ -43,8 +43,9 @@ export function Movie(props: MovieProps) {
     }
 
     return (
-        <ButtonStyle onClick={() => goToMoviePage(`/movie/${props.id}`)}>
-            <MovieStyle style={{backgroundImage: `url(${props.image})`}} />
-        </ButtonStyle>
+        <MovieStyle 
+            style={{backgroundImage: `url(${props.image})`}}
+            onClick={() => goToMoviePage(`/movie/${props.id}`)}
+        />
     )
 }

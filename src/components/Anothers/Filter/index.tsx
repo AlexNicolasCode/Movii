@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useFilter } from "../../contexts/filter"
+import { useFilter } from "../../../contexts/filter"
 
 const FilterSelected = styled.li`
     display: inline-block;
@@ -23,18 +23,28 @@ const FilterSelected = styled.li`
         font-size: 8px;
         margin-left: 5px;
     }
+
+    @media (max-width: 768px) {
+        width: 200px;
+        height: 40px;
+        font-size: 16px;
+
+        button {
+            font-size: 16px;
+            margin: 4px;
+        }
+    }
 `
 
 type FilterProps = {
     name: string,
-    key: number,
 }
 
 export function FilterModel(props: FilterProps) {
     const { removeFilter } = useFilter()
 
     return (
-        <FilterSelected key={props.key}>
+        <FilterSelected>
             <span>{props.name}</span>
             <button onClick={() => removeFilter(props.name)}>X</button>
         </FilterSelected>

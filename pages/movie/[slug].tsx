@@ -3,82 +3,11 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 import { api } from "../../src/services/api"
-import { Movie } from '../../src/components/movie'
+import { Movie } from '../../src/components/Anothers/MovieComponent'
 import { useFilter } from '../../src/contexts/filter'
 import { useRouter } from 'next/dist/client/router'
-import { AllMoviesStyle } from '../../src/components/styles/home'
-
-const Main = styled.main`
-    margin: 8px 16px;
-
-    section {
-        margin-bottom: 16px;
-
-        h2 {
-            margin-bottom: 8px;
-        }
-    }
-`
-
-const BackButton = styled.button`
-    background: none;
-    outline: none;
-    border: 2px solid #f2f2f2;
-    border-radius: 0 0 10 10px;
-    color: #f2f2f2;
-
-    height: 50px;
-    width: 50px;
-    margin-bottom: 16px;
-    font-weight: 700;
-
-    &:hover {
-        background: #f2f2f2;
-        color: #111111;
-        transition: 0.2s;
-    }
-`
-const Apresentation = styled.section`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    margin-left: 8px;
-    
-    img {  
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: none;
-
-        padding: 20px;
-        height: 500px;
-
-        &:hover {
-            transform: scale(110%);
-            transition: 0.2s;
-        }
-    }
-`
-
-const Article = styled.div`
-    width: 70%;
-    margin-left: 16px;
-    float: right;
-
-    h1 {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    h2 {
-        font-size: 24px;
-    }
-
-    p {
-        font-size: 16px;
-    }
-`
+import { AllMoviesStyle } from '../../src/components/Anothers'
+import { Apresentation, Main, Article, BackButton } from '../../src/components/MoviePage' 
 
 type MovieData = {
     movie: {
@@ -138,7 +67,7 @@ export default function MoviePage({ movie, similarMovies }: MovieData) {
                     <Article>
                         <h1>{movie.title} - {movie.vote_average}</h1>
                         <h2>Sinopse</h2>
-                        <p>{movie.overview}</p>      
+                        <p>{movie.overview}</p> 
                     </Article>
                 </Apresentation>
 

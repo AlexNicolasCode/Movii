@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useFilter } from '../../../contexts/filter'
+import { useFilter } from '../../../../contexts/filter'
 
 const ButtonGender = styled.button`
     text-align: center;
