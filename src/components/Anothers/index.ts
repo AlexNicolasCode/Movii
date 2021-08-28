@@ -3,9 +3,7 @@ import styled from 'styled-components'
 export const Title = styled.h1`
     font-size: 40px;
     width: 100%;
-    padding: 10px;
-    margin-left: 8px;
-
+    padding: 20px;
 
     @media (max-width: 768px) {
         margin-top: 56px;
