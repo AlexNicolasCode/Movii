@@ -66,7 +66,7 @@ export function Pagination(props: PageProps) {
                 <div />
             )}
 
-            <CurrentPageSender disabled>
+            <CurrentPageSender>
                     {`${id}`}
             </CurrentPageSender>
 
